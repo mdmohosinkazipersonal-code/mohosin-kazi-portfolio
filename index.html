@@ -52,7 +52,30 @@ footer{padding:22px 6%;border-top:1px solid var(--line);display:flex;justify-con
 @keyframes bubbleIn{to{opacity:1;transform:translateY(0)}}
 @media(max-width:850px){.ai-greeter{right:0;top:55px;width:130px;opacity:.22}.ai-greeter .bot{font-size:76px}.ai-greeter .wave{font-size:30px}.ai-greeter .bubble{right:65px;top:-20px;font-size:11px}}
 @media(prefers-reduced-motion:reduce){.ai-greeter,.ai-greeter *{animation:none!important;opacity:.22;transform:none}}
+/* Mobile menu button */
+.menu-toggle {
+  display: none;
+  background: transparent;
+  color: white;
+  border: 1px solid #08c9ff;
+  border-radius: 8px;
+  padding: 7px 12px;
+  font-size: 22px;
+  cursor: pointer;
+}
+ @media (max-width: 850px) {
+  .menu-toggle {
+    display: block;
+  }
 
+  header nav a {
+    display: none;
+  }
+
+  header nav.open a {
+    display: inline-block;
+  }
+}
 </style>
 </head>
 <body>
@@ -60,6 +83,9 @@ footer{padding:22px 6%;border-top:1px solid var(--line);display:flex;justify-con
 <header>
  <div class="brand"><div class="brand-mark">MN</div><div>Mohosin Kazi<small>Web Designer &amp; Learner</small></div></div>
  <nav aria-label="Main navigation">
+  <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false">
+  ☰
+</button>
   <a href="#home">Home</a><a href="#about">About</a><a href="#skills">Skills</a><a href="#education">Education</a><a href="#experience">Experience</a><a href="#projects">Projects</a><a href="#contact">Contact</a>
  </nav>
 </header>
@@ -138,5 +164,11 @@ function resize(){canvas.width=innerWidth;canvas.height=innerHeight;dots=Array.f
 function draw(){ctx.clearRect(0,0,canvas.width,canvas.height);dots.forEach(d=>{d.y-=d.s;if(d.y<0){d.y=canvas.height;d.x=Math.random()*canvas.width}ctx.beginPath();ctx.arc(d.x,d.y,d.r,0,Math.PI*2);ctx.fillStyle='rgba(0,190,255,.65)';ctx.fill()});requestAnimationFrame(draw)}
 addEventListener('resize',resize);resize();draw();
 setTimeout(()=>{const w=document.getElementById('welcome');if(w)w.style.opacity='0';setTimeout(()=>w&&w.remove(),700)},6500);
+ const menuButton = document.querySelector('.menu-toggle');
+const nav = document.querySelector('header nav');
+
+menuButton.addEventListener('click', function() {
+  nav.classList.toggle('open');
+});
 </script>
-</body></html>
+ </body></html>
